@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap');
+
+body {    
+    font-family: 'Google Sans Flex', Arial, Helvetica, sans-serif;
+    background-color: #0B3D2E;
+       
+}
+
+
+h1, h2, h3 {
+    color: #0B3D2E;
+}
+
+.nav-tabs .nav-link i {
+    color: #0B3D2E;
+    opacity: 0.4; /* deixa mais claro */
+    transition: all 0.3s ease;
+}
+
+/* Ícone da aba ativa */
+.nav-tabs .nav-link.active i {
+    color: #0B3D2E;
+    opacity: 1;
+}
+
+.form-control:focus, .form-label:focus, .form-select:focus, .form-select:focus {
+    border-color: #0B3D2E;
+    color: #0B3D2E;
+    box-shadow: 0 0 0 0.25rem rgba(11, 61, 46, 0.25);
+}

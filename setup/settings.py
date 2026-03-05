@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tesouros_do_ifpi',
+    'bootstrap5',
 ]
 
 MIDDLEWARE = [
