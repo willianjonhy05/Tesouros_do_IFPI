@@ -1,0 +1,247 @@
+{% load static bootstrap5 %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{% static 'img/icon.png' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Formulário de Votação</title>
+</head>
+
+<body class="d-flex justify-content-center align-items-center min-vh-100 p-4">
+
+    <div class="container bg-white p-4 rounded shadow-lg w-100" style="max-width:800px;">
+        <h1 class="text-center mb-4">Votação - Tesouros do IFPI 2026</h1>
+
+        <!-- Abas de categorias -->
+        <ul class="nav nav-tabs justify-content-center mb-4" id="votacaoTabs" role="tablist">
+
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#AlunoAtual" type="button">
+                    <i class="fa-solid fa-user-graduate"></i>
+                </button>
+            </li>
+
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#ExAluno" type="button">
+                    <i class="fa-solid fa-user-check"></i>
+                </button>
+            </li>
+
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#ProfessorAtual" type="button">
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                </button>
+            </li>
+
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#ExProfessor" type="button">
+                    <i class="fa-solid fa-user-tie"></i>
+                </button>
+            </li>
+
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#TecnicoAtual" type="button">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                </button>
+            </li>
+
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#ExTecnico" type="button">
+                    <i class="fa-solid fa-toolbox"></i>
+                </button>
+            </li>
+
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#Terceirizado" type="button">
+                    <i class="fa-solid fa-id-badge"></i>
+                </button>
+            </li>
+
+        </ul>
+
+        <!-- Formulário para Aluno Atual -->
+        <div class="tab-content">
+
+            <div class="tab-pane fade show active p-3 bg-light rounded mb-4" id="AlunoAtual">
+                <h3 class="mb-3 text-success">Aluno Atual</h3>
+                <div class="mb-3">
+                    <label class="form-label" for="NomeDoAlunoAtual">Nome:</label>
+                    <input type="text" id="NomeDoAlunoAtual" class="form-control" placeholder="Escreva o nome do aluno">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="ModuloDoAlunoAtual" >Curso/Módulo:</label>
+                    <input type="text" id="ModuloDoAlunoAtual" class="form-control" placeholder="Exemplo: Módulo 3 do Curso Técnico em Informática">
+                </div>
+            </div>
+
+             <!-- Formulário para Ex-Aluno -->
+            <div class="tab-pane fade p-4 bg-light rounded mb-4" id="ExAluno">
+                <h3 class="mb-3 text-success">Ex-Aluno</h3>
+
+                <div class="mb-3">
+                    <label class="form-label" for="NomeDoExAluno" >Nome: </label>
+                    <input type="text" id="NomeDoExAluno" placeholder="Escreva o nome do ex-aluno indicado" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="CursoDoExAluno">Curso: </label>
+                    <input type="text" id="CursoDoExAluno" class="form-control" placeholder="Escreva o nome do curso que o indicado se formou">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="FuncaoDoExAluno">Função/Ocupação atual: </label>
+                    <input type="text" id="FuncaoDoExAluno" class="form-control" placeholder="Qual a função atual desse ex-Aluno indicado">
+                </div>
+            </div>
+
+             <!-- Formulário para Professor Atual -->
+            <div class="tab-pane fade p-4 bg-light rounded mb-4" id="ProfessorAtual">
+                <h3 class="mb-3 text-success">Professor Atual</h3>
+
+                <div class="mb-3">
+                    <label class="form-label" for="NomeDoProfessorAtual">Nome do professor:</label>
+                    <input type="text" id="NomeDoProfessorAtual" class="form-control" placeholder="Escreva o nome do professor">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="DepartamentoDoProfessorAtual">Departamento/Disciplina/Curso: </label>
+                    <input type="text" id="DepartamentoDoProfessorAtual" class="form-control" placeholder="Escreva o nome do departamento/disciplina/curso para identifica-lo">
+                </div>
+            </div>
+
+             <!-- Formulário para Ex-Professor -->
+            <div class="tab-pane fade p-4 bg-light rounded mb-4" id="ExProfessor">
+                <h3 class="mb-3 text-success">Ex-Professor</h3>
+
+                <div class="mb-3">
+                    <label class="form-label" for="NomeDoExProfessor">Nome:</label>
+                    <input type="text" id="NomeDoExProfessor" class="form-control" placeholder="Escreva o nome do ex-professor">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="DepartamentoDoExProfessor">Departamento/Setor:</label>
+                    <input type="text" id="DepartamentoDoExProfessor" class="form-control" placeholder="Escreva o departamento que estava vinculado o ex-professor">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="FuncaoDoExProfessor">Função/Ocupação Atual:</label>
+                    <input type="text" id="FuncaoDoExProfessor" class="form-control" placeholder="Escreva a função atual do ex-professor">
+                </div>
+            </div>
+
+             <!-- Formulário para Técnico Administrativo Atual -->
+
+            <div class="tab-pane fade p-4 bg-light rounded mb-4" id="TecnicoAtual">
+                <h3 class="mb-3 text-success">Técnico Administrativo Atual</h3>
+
+                <div class="mb-3">
+                    <label class="form-label" for="NomeDoTecnicoAtual">Nome:</label>
+                    <input type="text" id="NomeDoTecnicoAtual" class="form-control" placeholder="Escreva o nome do técnico atual">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="FuncaoDoTecnicoAtual">Função/Atividade:</label>
+                    <input type="text" id="FuncaoDoTecnicoAtual" class="form-control" placeholder="Escreva a função/atividade desempenhada pelo técnico atual">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="SetorDoTecnicoAtual">Setor:</label>
+                    <input type="text" id="SetorDoTecnicoAtual" class="form-control" placeholder="Escreva o setor do técnico atual">
+                </div>
+            </div>
+
+                <!-- Formulário para Ex-Técnico Administrativo -->
+
+            <div class="tab-pane fade p-4 bg-light rounded mb-4" id="ExTecnico">
+                <h3 class="mb-3 text-success">Ex-Técnico</h3>
+
+                <div class="mb-3">
+                    <label class="form-label" for="NomeDoExTecnico">Nome:</label>
+                    <input type="text" id="NomeDoExTecnico" class="form-control" placeholder="Escreva o nome do ex-técnico">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="FuncaoDoExTecnico">Função/Atividade:</label>
+                    <input type="text" id="FuncaoDoExTecnico" class="form-control" placeholder="Escreva a função/atividade desempenhada pelo ex-técnico">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="SetorDoExTecnico">Setor em que atuou:</label>
+                    <input type="text" id="SetorDoExTecnico" class="form-control" placeholder="Escreva o setor em que o ex-técnico atuou">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="FuncaoAtualDoExTecnico">Função Atual:</label>
+                    <input type="text" id="FuncaoAtualDoExTecnico" class="form-control" placeholder="Escreva a função/ocupação atual do ex-técnico">
+                </div>
+            </div>
+            
+             <!-- Formulário para Funcionário Terceirizado -->
+
+            <div class="tab-pane fade p-4 bg-light rounded mb-4" id="Terceirizado">
+                <h3 class="mb-3 text-success">Funcionário Terceirizado</h3>
+
+                <div class="mb-3">
+                    <label class="form-label" for="NomeDoTerceirizado">Nome:</label>
+                    <input type="text" id="NomeDoTerceirizado" class="form-control" placeholder="Escreva o nome do funcionário terceirizado">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="FuncaoDoTerceirizado">Função/Atividade:</label>
+                    <input type="text" id="FuncaoDoTerceirizado" class="form-control" placeholder="Escreva a função/atividade do funcionário terceirizado">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="SetorDoTerceirizado">Setor:</label>
+                    <input type="text" id="SetorDoTerceirizado" class="form-control" placeholder="Escreva o setor do funcionário terceirizado">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="EmpresaPrestadoraTerceirizado">Empresa Prestadora:</label>
+                    <input type="text" id="EmpresaPrestadoraTerceirizado" class="form-control" placeholder="Escreva o nome da empresa prestadora de serviço">
+                </div>
+                <!-- Botão de finalizar -->
+                <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#modalConfirmacao">Finalizar</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Modal de Revisão -->
+    <div class="modal fade" id="modalConfirmacao" tabindex="-1" aria-labelledby="modalConfirmacaoLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalConfirmacaoLabel">Revisão de Votação</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Aluno Atual:</strong> <span id="revNomeAluno"></span>, <span id="revCursoAluno"></span></p>
+                    <p><strong>Ex-Aluno:</strong> <span id="revNomeExAluno"></span>, <span id="revCursoExAluno"></span>, <span id="revFuncaoExAluno"></span></p>
+                    <p><strong>Professor Atual:</strong> <span id="revNomeProfessor"></span>, <span id="revDepartamentoProfessor"></span></p>
+                    <p><strong>Ex-Professor:</strong> <span id="revNomeExProfessor"></span>, <span id="revDepartamentoExProfessor"></span>, <span id="revFuncaoExProfessor"></span></p>
+                    <p><strong>Técnico Atual:</strong> <span id="revNomeTecnico"></span>, <span id="revFuncaoTecnico"></span>, <span id="revSetorTecnico"></span></p>
+                    <p><strong>Ex-Técnico:</strong> <span id="revNomeExTecnico"></span>, <span id="revFuncaoExTecnico"></span>, <span id="revSetorExTecnico"></span>, <span id="revFuncaoAtualExTecnico"></span></p>
+                    <p><strong>Funcionário Terceirizado:</strong> <span id="revNomeTerceirizado"></span>, <span id="revFuncaoTerceirizado"></span>, <span id="revSetorTerceirizado"></span>, <span id="revEmpresaTerceirizado"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Editar</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="finalizarVotacao()">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+    
+</body>
+</html>
