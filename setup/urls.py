@@ -21,6 +21,7 @@ from django.conf import settings
 from tesouros_do_ifpi import views
 
 urlpatterns = [
+    path('', views.index, name='index'),
     path('admin/', admin.site.urls),
     path('contato/', views.contato, name='contato'),
     path('votacao/', include('tesouros_do_ifpi.urls')),

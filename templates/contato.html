@@ -1,6 +1,7 @@
 {% load static bootstrap5 %}
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,64 +13,77 @@
 
 <body>
 
-<div class="container d-flex justify-content-center align-items-center min-vh-100">
-    
-    <div class="card shadow-lg p-4 w-100" style="max-width: 700px;">
-        
-        <h2 class="text-center mb-4 text-success">Fale Conosco</h2>
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
 
-        <!-- Alterei os IDs duplicados para únicos e corrigi o 'name' nos campos para envio correto -->
-        <form action="/static/php/enviar_contato.php" method="POST">
+        <div class="card shadow-lg p-4 w-100" style="max-width: 700px;">
 
-            <!-- Nome -->
-            <div class="mb-3">
-                <label for="nome" class="form-label">Nome completo: </label>
-                <input id="nome" type="text" class="form-control" name="nome" placeholder="Digite seu nome completo" required>
+            <h2 class="text-center mb-4 text-success">Fale Conosco</h2>
+
+            {% if messages %}
+            <div class="alert alert-success">
+                {% for message in messages %}
+                <p>{{ message }}</p>
+                {% endfor %}
             </div>
+            {% endif %}
 
-            <!-- Email -->
-            <div class="mb-3">
-                <label for="email" class="form-label">E-mail: </label>
-                <input type="email" class="form-control" name="email" id="email" placeholder="Digite seu e-mail" required>
-            </div>
+            <!-- Alterei os IDs duplicados para únicos e corrigi o 'name' nos campos para envio correto -->
+            <form action="#" method="POST">
+                {% csrf_token %}
 
-            <!-- Telefone -->
-            <div class="mb-3">
-                <label for="telefone" class="form-label">Telefone: </label>
-                <input type="tel" class="form-control" name="telefone" id="telefone" placeholder="(99) 99999-9999">
-            </div>
+                <!-- Nome -->
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome completo: </label>
+                    <input id="nome" type="text" class="form-control" name="nome" placeholder="Digite seu nome completo"
+                        required>
+                </div>
 
-            <!-- Assunto -->
-            <div class="mb-3">
-                <label for="assunto" class="form-label">Assunto: </label>
-                <select class="form-select" name="assunto" id="assunto" required>
-                    <option value="">Selecione uma opção</option>
-                    <option value="critica">Críticas</option>
-                    <option value="sugestao">Sugestões</option>
-                    <option value="duvida">Dúvidas</option>
-                    <option value="erro">Relatar erro</option>
-                    <option value="outros">Outros</option>
-                </select>
-            </div>
+                <!-- Email -->
+                <div class="mb-3">
+                    <label for="email" class="form-label">E-mail: </label>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Digite seu e-mail"
+                        required>
+                </div>
 
-            <!-- Mensagem -->
-            <div class="mb-4">
-                <label for="mensagem" class="form-label">Mensagem:</label>
-                <textarea class="form-control" name="mensagem" id="mensagem" rows="5" placeholder="Escreva sua mensagem aqui..." required></textarea>
-            </div>
+                <!-- Telefone -->
+                <div class="mb-3">
+                    <label for="telefone" class="form-label">Telefone: </label>
+                    <input type="tel" class="form-control" name="telefone" id="telefone" placeholder="(99) 99999-9999">
+                </div>
 
-            <!-- Botões -->
-            <div class="d-flex justify-content-between">
-                <button type="reset" class="btn btn-outline-secondary">Limpar</button>
-                <button type="submit" class="btn btn-success">Enviar Mensagem</button>
-            </div>
+                <!-- Assunto -->
+                <div class="mb-3">
+                    <label for="assunto" class="form-label">Assunto: </label>
+                    <select class="form-select" name="assunto" id="assunto" required>
+                        <option value="" disabled selected>Selecione uma opção</option>
+                        <option value="critica">Críticas</option>
+                        <option value="sugestao">Sugestões</option>
+                        <option value="duvida">Dúvidas</option>
+                        <option value="erro">Relatar erro</option>
+                        <option value="outros">Outros</option>
+                    </select>
+                </div>
 
-        </form>
+                <!-- Mensagem -->
+                <div class="mb-4">
+                    <label for="mensagem" class="form-label">Mensagem:</label>
+                    <textarea class="form-control" name="mensagem" id="mensagem" rows="5"
+                        placeholder="Escreva sua mensagem aqui..." required></textarea>
+                </div>
+
+                <!-- Botões -->
+                <div class="d-flex justify-content-between">
+                    <button type="reset" class="btn btn-outline-secondary">Limpar</button>
+                    <button type="submit" class="btn btn-success">Enviar Mensagem</button>
+                </div>
+
+            </form>
+        </div>
+
     </div>
 
-</div>
-
-<script src="{% static 'js/telefone.js' %}"></script>
+    <script src="{% static 'js/telefone.js' %}"></script>
 
 </body>
+
 </html>
