@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.utils.text import slugify
 
 # Create your models here.
 class Usuario(models.Model):
@@ -23,7 +24,13 @@ class Usuario(models.Model):
         
 class Categoria(models.Model):
     nome = models.CharField("Nome", max_length=100, blank=True, null=True)
+    slug = models.SlugField(unique=True, blank=True, null=True)
     descricao = models.TextField("Descrição", blank=True, null=True)
+    
+    def save(self, *args, **kwargs):
+        if not self.slug and self.nome:
+            self.slug = slugify(self.nome)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.nome
@@ -70,6 +77,7 @@ class Voto(models.Model):
     nome_empresa = models.CharField("Nome da Empresa", max_length=200, blank=True, null=True)
     nome_ou_ocupacao_atual = models.CharField("Função/Ocupação Atual", max_length=200, blank=True, null=True)
     data_voto = models.DateTimeField(auto_now_add=True)
+    data_confirmacao = models.DateTimeField("Data de Confirmação", null=True, blank=True)
     confirmacao = models.BooleanField(default=False)
     
     def __str__(self):

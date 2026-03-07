@@ -1,8 +1,23 @@
 from django.shortcuts import render, redirect
-from .models import Contato, Usuario
+from .models import Contato, Usuario, Voto
 from django.contrib import messages
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
+from .forms import ExAluno, AlunoAtual, DocenteAtual, ExDocente, TecnicoAdmAtual, ExTecnicoAdm, Terceirizado
+
+
+
+FORM_CATEGORIAS = {
+
+    "ex-aluno-do-ifpi": ExAluno,
+    "aluno-atual-do-ifpi": AlunoAtual,
+    "professor-atual-do-ifpi": DocenteAtual,
+    "ex-professor-do-ifpi": ExDocente,
+    "tecnico-atual-do-ifpi": TecnicoAdmAtual,
+    "ex-tecnico-do-ifpi": ExTecnicoAdm,
+    "terceirizado": Terceirizado,
+
+}
 # Create your views here.
 
 
@@ -92,7 +107,7 @@ def votacao(request):
     if not usuario:
         return redirect('termos')
 
-    return render(request, 'votacao.html')
+    return render(request, 'meus_votos.html')
 
 def identificacao(request):
     return render(request, 'identificacao.html')
@@ -121,6 +136,64 @@ def sair(request):
     request.session.flush()
     return redirect('identificacao')
 
+
+def meus_votos(request):
+    cpf = request.session.get('cpf_autorizado')
+
+    if not cpf:
+        return redirect('identificacao')
+
+    usuario = get_object_or_404(Usuario, cpf=cpf)
+
+    if usuario.concorda_termos == False:
+        return redirect('termos')
+    
+    votos = Voto.objects.filter(usuario=usuario)
+
+    return render(request, 'meus_votos.html', {'votos': votos})
+
+
+
+def votar(request, voto_id):
+
+    cpf = request.session.get('cpf_autorizado')
+
+    if not cpf:
+        return redirect('identificacao')
+
+    usuario = get_object_or_404(Usuario, cpf=cpf)
+
+    voto = get_object_or_404(Voto, id=voto_id, usuario=usuario)
+
+    if voto.confirmacao:
+        return redirect('votacao')
+
+    FormClass = FORM_CATEGORIAS.get(voto.categoria.slug)
+
+    if not FormClass:
+        return redirect('votacao')
+
+    if request.method == "POST":
+
+        form = FormClass(request.POST, instance=voto)
+
+        if form.is_valid():
+
+            voto = form.save(commit=False)
+            voto.confirmacao = True
+            voto.data_confirmacao = timezone.now()
+            voto.save()
+
+            return redirect('votacao')
+
+    else:
+
+        form = FormClass(instance=voto)
+
+    return render(request, "votar.html", {
+        "form": form,
+        "voto": voto
+    })
 
 def index(request):
     return render(request, 'index.html')
