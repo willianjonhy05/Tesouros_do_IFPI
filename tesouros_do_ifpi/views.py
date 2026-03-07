@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Contato, Usuario
 from django.contrib import messages
 from django.utils import timezone
-
+from django.shortcuts import get_object_or_404
 # Create your views here.
 
 
@@ -63,11 +63,10 @@ def termos(request):
 
         if concorda_termos and cpf:
 
-            usuario = Usuario.objects.get_or_create(cpf=cpf)
+            usuario = get_object_or_404(Usuario, cpf=cpf)
 
             usuario.concorda_termos = True
             usuario.data_aceite = timezone.now()
-
             ip = request.META.get('REMOTE_ADDR')
             usuario.ip_aceite = ip
 

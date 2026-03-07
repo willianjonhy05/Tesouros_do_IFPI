@@ -4,7 +4,7 @@ from django.utils import timezone
 # Create your models here.
 class Usuario(models.Model):
     nome = models.CharField("Nome", max_length=100, blank=True, null=True)
-    cpf = models.CharField("CPF", max_length=15, null=True, blank=True)
+    cpf = models.CharField("CPF", max_length=15, null=True, blank=True, unique=True)
     telefone = models.CharField("Telefone", max_length=15, null=True, blank=True)
     data_nasc = models.DateField("Data de Nascimento", null=True, blank=True)
     matricula = models.CharField("Matrícula", max_length=20, null=True, blank=True)
@@ -78,3 +78,4 @@ class Voto(models.Model):
     class Meta:
         verbose_name = "Voto"
         verbose_name_plural = "Votos"
+        unique_together = ['usuario', 'categoria']
