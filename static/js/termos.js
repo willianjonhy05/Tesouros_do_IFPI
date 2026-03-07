@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
 
     const termos = document.querySelector(".termos-texto");
     const checkbox = document.getElementById("concordo");
@@ -7,22 +7,19 @@ document.addEventListener("DOMContentLoaded", function () {
     let leuTudo = false;
 
     function verificarLiberacao() {
-        if (leuTudo && checkbox.checked) {
-            botao.disabled = false;
-            botao.classList.add("ativo");
-        } else {
-            botao.disabled = true;
-            botao.classList.remove("ativo");
-        }
+        botao.disabled = !(leuTudo && checkbox.checked);
     }
 
-    termos.addEventListener("scroll", function () {
+    termos.addEventListener("scroll", () => {
 
-        if (termos.scrollTop + termos.clientHeight >= termos.scrollHeight - 5) {
+        const chegouFim =
+            termos.scrollTop + termos.clientHeight >= termos.scrollHeight - 5;
+
+        if (chegouFim) {
             leuTudo = true;
-            verificarLiberacao();
         }
 
+        verificarLiberacao();
     });
 
     checkbox.addEventListener("change", verificarLiberacao);

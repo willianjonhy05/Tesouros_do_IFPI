@@ -73,7 +73,7 @@ class Voto(models.Model):
     confirmacao = models.BooleanField(default=False)
     
     def __str__(self):
-       return f"Voto de {self.usuario.nome}"
+       return f"Voto de {self.usuario.nome} em {self.categoria.nome}"
    
     class Meta:
         verbose_name = "Voto"
