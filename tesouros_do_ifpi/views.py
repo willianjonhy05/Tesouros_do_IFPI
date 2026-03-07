@@ -30,6 +30,27 @@ def contato(request):
 
     return render(request, 'contato.html')
 
+def home_contato(request):
+
+    if request.method == "POST":
+
+        nome = request.POST.get("name")
+        email = request.POST.get("email")
+        telefone = request.POST.get("phone")        
+        mensagem = request.POST.get("message")
+
+        Contato.objects.create(
+            nome=nome,
+            email=email,
+            telefone=telefone,            
+            mensagem=mensagem
+        )
+
+        messages.success(request, "Mensagem enviada com sucesso!")
+        return redirect('index')
+
+    return redirect('index')
+
 def termos(request):
 
     if not request.session.get('cpf_autorizado'):
