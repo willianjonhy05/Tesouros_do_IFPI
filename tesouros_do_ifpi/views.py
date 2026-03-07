@@ -55,7 +55,7 @@ def termos(request):
 
     if not request.session.get('cpf_autorizado'):
         return redirect('identificacao')
-
+    
     if request.method == "POST":
 
         concorda_termos = request.POST.get('concorda_termos') == 'on'
@@ -105,7 +105,13 @@ def processar_identificacao(request):
 
         if Usuario.objects.filter(cpf=cpf).exists():
             request.session['cpf_autorizado'] = cpf
-            return redirect('termos')
+            
+            usuario = get_object_or_404(Usuario, cpf=cpf)
+            if usuario.concorda_termos:
+                return redirect('votacao')
+            else:
+            
+                return redirect('termos')
         else:
             return redirect('nao_autorizado')
 
