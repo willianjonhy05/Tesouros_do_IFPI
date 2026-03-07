@@ -134,7 +134,7 @@ def processar_identificacao(request):
 
 def sair(request):
     request.session.flush()
-    return redirect('identificacao')
+    return redirect('index')
 
 
 def meus_votos(request):

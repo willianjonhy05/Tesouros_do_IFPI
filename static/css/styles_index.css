@@ -2853,7 +2853,8 @@ textarea.form-control-lg {
   --bs-btn-border-color: #0B3D2E;
   --bs-btn-hover-color: #fff;
   /* --bs-btn-hover-bg: #cf5331; */
-  --bs-btn-hover-bg: #cf5331;
+  /* --bs-btn-hover-bg: #cf5331; */
+  --bs-btn-hover-bg: #36584e;
   /* --bs-btn-hover-border-color: #c34e2e; */
   --bs-btn-hover-border-color: #0A3327;
   --bs-btn-focus-shadow-rgb: 246, 122, 88;
@@ -10924,7 +10925,7 @@ hr.divider-light {
     color: #212529;
   }
   #mainNav.navbar-shrink .navbar-brand:hover {
-    color: #f4623a;
+    color: #0B3D2E;
   }
   #mainNav.navbar-shrink .navbar-nav .nav-item .nav-link {
     color: #212529;
@@ -10985,7 +10986,8 @@ header.masthead h1, header.masthead .h1 {
   text-align: center;
   opacity: 0;
   color: #fff;
-  background: rgba(244, 98, 58, 0.9);
+  /* background: rgba(244, 98, 58, 0.9); */
+  background: rgba(11, 61, 43, 0.9);
   transition: opacity 0.25s ease;
   text-align: center;
 }
