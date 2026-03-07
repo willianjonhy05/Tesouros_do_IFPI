@@ -6,7 +6,7 @@ from .models import Usuario, Contato, Categoria, Voto
 
 @admin.register(Usuario)
 class UsuarioAdmin(admin.ModelAdmin):
-    list_display = ["nome","email", "telefone", "cpf"]
+    list_display = ["cpf"]
     search_fields = ["cpf"]
     list_per_page = 10
     

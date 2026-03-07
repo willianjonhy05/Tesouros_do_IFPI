@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('contato/', views.contato, name='contato'),
     path('votacao/', include('tesouros_do_ifpi.urls')),
+    path('identificacao/', views.identificacao, name='identificacao'),
 ]
 
 

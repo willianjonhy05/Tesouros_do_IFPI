@@ -1,0 +1,50 @@
+{% load static bootstrap5 %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{% static 'img/icon.png' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% bootstrap_css %}
+    <title>Acesso não autorizado</title>
+</head>
+
+<body style="background-color:#0B3D2E;">
+
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    
+    <div class="card shadow-lg p-5 w-100 text-center" style="max-width:700px;">
+
+        <h2 class="text-danger mb-4"><strong>Acesso não autorizado</strong></h2>
+
+        <p>
+            O CPF informado não está autorizado a participar da votação do evento
+            <strong>"Tesouros do IFPI 2026"</strong>.
+        </p>
+
+        <p>
+            Caso você acredite que isso seja um erro ou tenha dúvidas sobre sua participação,
+            entre em contato com a organização do evento.
+        </p>
+
+        <div class="d-flex justify-content-center gap-3 mt-4">
+
+            <a href="{% url 'identificacao' %}" class="btn btn-secondary">
+                Tentar novamente
+            </a>
+
+            <a href="{% url 'contato' %}" class="btn btn-success">
+                Entrar em contato
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% bootstrap_javascript %}
+
+</body>
+</html>

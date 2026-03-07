@@ -33,20 +33,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Se for válido, redireciona para termos.html
-    form.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        const cpf = cpfInput.value.replace(/\D/g, "");
-
-        if (validarCPF(cpf)) {
-            // Salva CPF temporariamente (opcional)
-            localStorage.setItem("cpf_validado", cpf);
-
-            // Redireciona para página de termos
-            window.location.href = "templates/termos.html";
-        }
-    });
 
     function validarCPF(cpf) {
         if (cpf.length !== 11) return false;

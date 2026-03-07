@@ -9,10 +9,12 @@ class Usuario(models.Model):
     data_nasc = models.DateField("Data de Nascimento", null=True, blank=True)
     matricula = models.CharField("Matrícula", max_length=20, null=True, blank=True)
     concorda_termos = models.BooleanField("Concorda com os termos", default=False)
+    data_aceite = models.DateTimeField("Data de Aceite", null=True, blank=True)
+    ip_aceite = models.GenericIPAddressField("IP de Aceite", null=True, blank=True)
     email = models.EmailField("Email", max_length=100, blank=True, null=True)
 
     def __str__(self):
-        return self.nome
+        return self.cpf
     
     class Meta:
         verbose_name = "Usuario"

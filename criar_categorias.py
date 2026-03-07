@@ -1,3 +1,9 @@
+import os
+import django
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "setup.settings")
+django.setup()
+
 from tesouros_do_ifpi.models import Categoria
 
 categorias = [
@@ -16,4 +22,4 @@ for nome, descricao in categorias:
         defaults={"descricao": descricao}
     )
 
-print("Categorias cadastradas com sucesso!")
+print("Categorias criadas com sucesso!")
