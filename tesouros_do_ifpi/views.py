@@ -164,6 +164,9 @@ def votar(request, voto_id):
     usuario = get_object_or_404(Usuario, cpf=cpf)
 
     voto = get_object_or_404(Voto, id=voto_id, usuario=usuario)
+    
+    if usuario.concorda_termos == False:
+        return redirect('termos')
 
     if voto.confirmacao:
         return redirect('votacao')
