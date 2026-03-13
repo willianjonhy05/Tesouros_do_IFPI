@@ -9,5 +9,7 @@ urlpatterns = [
     path('sair/', views.sair, name='sair'),
     path('home-contato/', views.home_contato, name='home_contato'),
     path('votar/<int:voto_id>/', views.votar, name='votar'),
+    path("login/", views.login_view, name="login"),
+    path('dashboard/', views.dashboard, name='dashboard'),
     # path('meus-votos/', views.meus_votos, name='meus_votos'),
 ]

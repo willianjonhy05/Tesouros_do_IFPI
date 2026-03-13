@@ -3,8 +3,9 @@ from .models import Contato, Usuario, Voto
 from django.contrib import messages
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .forms import ExAluno, AlunoAtual, DocenteAtual, ExDocente, TecnicoAdmAtual, ExTecnicoAdm, Terceirizado
-
+from django.contrib.auth import authenticate, login
 
 
 FORM_CATEGORIAS = {
@@ -204,3 +205,32 @@ def index(request):
 
 def nao_autorizado(request):
     return render(request, 'nao_autorizado.html')
+
+### Views administrativas
+
+
+@login_required
+def dashboard(request):
+    if not request.user.is_superuser:
+        return redirect('nao_autorizado')
+    
+    return render(request, 'dashboard.html')
+
+
+def login_view(request):
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            if user.is_superuser:
+                login(request, user)
+                return redirect("dashboard")
+            else:
+                messages.error(request, "Você não tem permissão para acessar o sistema.")
+        else:
+            messages.error(request, "Usuário ou senha inválidos.")
+
+    return render(request, "login.html")
