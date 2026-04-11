@@ -77,7 +77,9 @@ tesouros_do_ifpi/
         ├── fullsize/
         └── thumbnails/
 
-## Tecnologias utilizadas
+
+
+# Tecnologias utilizadas
 
 - Python 3
 - Django 4.2
