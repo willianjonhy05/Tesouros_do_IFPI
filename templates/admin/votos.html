@@ -1,0 +1,76 @@
+{% extends 'admin/dashboard.html' %}
+{% load static %}
+
+{% block title %}Votos - Tesouros do IFPI{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+	integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="{% static 'css/votos.css' %}">
+{% endblock %}
+
+
+{% block titulo %}Indicados{% endblock %}
+
+
+{% block conteudo %}
+
+
+<div class="social-box">
+	<div class="container">
+		<div class="row">
+			{% for item in votos_por_categoria %}
+			<div class="col-lg-4 col-xs-12 text-center">
+				<div class="box border border-success">
+					<div class="box-title">
+						<h3>{{ item.categoria__nome }}</h3>
+					</div>
+					<div class="box-text">
+						<span>{{ item.total }} votos</span>
+					</div>
+					<div class="box-btn">
+						<a href="{% url 'relatorio_categoria' item.categoria__slug %}">
+							Ver relatório
+						</a>
+					</div>
+				</div>
+			</div>
+			{% empty %}
+
+			<div class="col-lg-4 col-xs-12 text-center">
+				<div class="box">
+					<div class="box-title">
+						<h3>{{ item.categoria.nome }}</h3>
+					</div>
+					<div class="box-text">
+						<span>{{ item.total }} votos</span>
+					</div>
+					<div class="box-btn">
+						<a href="#">Relatório</a>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+{% block js %}
+
+{% endblock %}

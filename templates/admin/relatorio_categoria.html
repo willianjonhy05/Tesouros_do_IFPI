@@ -1,0 +1,64 @@
+{% extends 'admin/dashboard.html' %}
+{% load static %}
+
+{% block title %}Relatório - {{ categoria.nome }}{% endblock %}
+
+{% block titulo %}
+Relatório - {{ categoria.nome }}
+{% endblock %}
+
+
+{% block botoes %}
+<div class="btn-toolbar mb-2 mb-md-0">
+    <a href="{% url 'exportar_excel_categoria' categoria.slug %}"
+       class="btn btn-success">
+        <i class="fa fa-file-excel"></i> Exportar Excel
+    </a>
+</div>
+{% endblock %}
+
+{% block conteudo %}
+
+<div class="container mt-4">
+
+    <h4 class="mb-3">Total de indicados: {{ votos|length }}</h4>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+
+            <thead class="table-dark">
+                <tr>
+                    <th>Nome</th>
+                    <th>Curso</th>
+                    <th>Setor</th>
+                    <th>Função</th>
+                    <th>Empresa</th>
+                    <th>Ocupação Atual</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for voto in votos %}
+                <tr>
+                    <td>{{ voto.nome }}</td>
+                    <td>{{ voto.nome_curso }}</td>
+                    <td>{{ voto.nome_setor }}</td>
+                    <td>{{ voto.nome_funcao }}</td>
+                    <td>{{ voto.nome_empresa }}</td>
+                    <td>{{ voto.nome_ou_ocupacao_atual }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center">
+                        Nenhum registro encontrado
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}

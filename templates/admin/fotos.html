@@ -1,0 +1,276 @@
+{% extends 'admin/dashboard.html' %}
+{% load static %}
+
+{% block title %}Fotos - Tesouros do IFPI{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="{% static 'css/categorias.css' %}">
+{% endblock %}
+
+{% block titulo %}Fotos{% endblock %}
+
+{% block botoes %}
+<div class="btn-toolbar mb-2 mb-md-0">
+    <div class="btn-group me-2">
+        <button type="button" class="btn btn-success"
+                data-bs-toggle="modal"
+                data-bs-target="#modalFoto">
+            <i class="fa-regular fa-square-plus"></i>
+        </button>
+    </div>
+</div>
+{% endblock %}
+
+{% block conteudo %}
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+
+    {% for foto in fotos %}
+    <div class="col">
+
+        <!-- CARD -->
+        <div class="card {% if not foto.ativo %}opacity-50{% endif %}">
+
+            <!-- IMAGEM COM FALLBACK -->
+            <img src="{% if foto.imagem_thumb %}{{ foto.imagem_thumb.url }}{% else %}{{ foto.imagem.url }}{% endif %}"
+                 class="card-img-top"
+                 alt="{{ foto.nome }}">
+
+            <div class="card-body">
+                <h5 class="card-title">{{ foto.nome }}</h5>
+
+                <p class="card-text text-truncate">
+                    {{ foto.descricao }}
+                </p>
+
+                <div class="d-flex gap-2">
+
+                    <!-- EDITAR -->
+                    <button class="btn btn-success btn-sm"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalEditar{{ foto.id }}">
+                        <i class="fa fa-pen"></i>
+                    </button>
+
+                    <!-- ATIVAR/DESATIVAR -->
+                    <a href="{% url 'toggle_foto' foto.id %}"
+                       class="btn btn-warning btn-sm">
+                        <i class="fa {% if foto.ativo %}fa-eye-slash{% else %}fa-eye{% endif %}"></i>
+                    </a>
+
+                    <!-- EXCLUIR -->
+                    <form method="POST"
+                          action="{% url 'excluir_foto' foto.id %}"
+                          onsubmit="return confirm('Tem certeza que deseja excluir esta foto?')">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ✅ MODAL DE EDIÇÃO (CORRETAMENTE DENTRO DO LOOP) -->
+    <div class="modal fade" id="modalEditar{{ foto.id }}" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <form method="POST"
+                      action="{% url 'editar_foto' foto.id %}"
+                      enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="modal-header">
+                        <h5 class="modal-title">Editar Foto</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <!-- Nome -->
+                        <div class="mb-3">
+                            <label class="form-label">Nome:</label>
+                            <input type="text"
+                                   name="nome"
+                                   class="form-control"
+                                   value="{{ foto.nome }}"
+                                   required>
+                        </div>
+
+                        <!-- Imagem -->
+                        <div class="mb-3">
+                            <label class="form-label">Nova imagem (opcional):</label>
+                            <input type="file"
+                                   name="imagem"
+                                   class="form-control"
+                                   accept="image/*">
+                        </div>
+
+                        <!-- Descrição -->
+                        <div class="mb-3">
+                            <label class="form-label">Descrição:</label>
+                            <textarea name="descricao"
+                                      class="form-control"
+                                      rows="3">{{ foto.descricao }}</textarea>
+                        </div>
+
+                        <!-- Link -->
+                        <div class="mb-3">
+                            <label class="form-label">Link:</label>
+                            <input type="url"
+                                   name="link"
+                                   class="form-control"
+                                   value="{{ foto.link }}">
+                        </div>
+
+                        <!-- Ativo -->
+                        <div class="form-check">
+                            <input class="form-check-input"
+                                   type="checkbox"
+                                   name="ativo"
+                                   {% if foto.ativo %}checked{% endif %}>
+                            <label class="form-check-label">Ativo</label>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
+                        <button class="btn btn-success" type="submit">
+                            Salvar
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+
+    
+</div>
+
+    <nav class="mt-4">
+    <ul class="pagination justify-content-center">
+
+        {% if fotos.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page=1">Primeira</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ fotos.previous_page_number }}">Anterior</a>
+        </li>
+        {% endif %}
+
+        <li class="page-item active">
+            <span class="page-link">
+                Página {{ fotos.number }} de {{ fotos.paginator.num_pages }}
+            </span>
+        </li>
+
+        {% if fotos.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ fotos.next_page_number }}">Próxima</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ fotos.paginator.num_pages }}">Última</a>
+        </li>
+        {% endif %}
+
+    </ul>
+</nav>
+
+<!-- ✅ MODAL DE CRIAÇÃO -->
+<div class="modal fade" id="modalFoto" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <form method="POST"
+                  action="{% url 'criar_foto' %}"
+                  enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Adicionar nova foto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <!-- Nome -->
+                    <div class="mb-3">
+                        <label class="form-label">Nome da imagem:</label>
+                        <input type="text" name="nome" class="form-control" required>
+                    </div>
+
+                    <!-- Imagem -->
+                    <div class="mb-3">
+                        <label class="form-label">Imagem:</label>
+                        <input type="file"
+                               name="imagem"
+                               class="form-control"
+                               accept="image/*"
+                               required>
+                    </div>
+
+                    <!-- Descrição -->
+                    <div class="mb-3">
+                        <label class="form-label">Descrição:</label>
+                        <textarea name="descricao"
+                                  class="form-control"
+                                  rows="3"></textarea>
+                    </div>
+
+                    <!-- Link -->
+                    <div class="mb-3">
+                        <label class="form-label">Link:</label>
+                        <input type="url"
+                               name="link"
+                               class="form-control"
+                               placeholder="https://...">
+                    </div>
+
+                    <!-- Ativo -->
+                    <div class="form-check">
+                        <input class="form-check-input"
+                               type="checkbox"
+                               name="ativo"
+                               checked>
+                        <label class="form-check-label">Ativo</label>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+
+                    <button type="submit"
+                            class="btn btn-success">
+                        Salvar
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+{% endblock %}

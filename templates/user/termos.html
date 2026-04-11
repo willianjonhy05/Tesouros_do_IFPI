@@ -1,0 +1,159 @@
+{% load static bootstrap5 %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termos de Consentimento</title>
+    <link rel="icon" type="image/png" href="{% static 'img/icon.png' %} ">
+
+    <!-- Link do Bootstrap (CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Seu CSS para ajustes específicos -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body class="d-flex align-items-center">
+
+    <div class="container rounded p-4 w-100 d-flex justify-content-center align-items-center min-vh-100">
+        <div class="card p-4 shadow rounded w-100" style="max-width: 800px;">
+            <h1 class="text-center mb-4">Termo de Consentimento e Aceite</h1>
+
+            <div class="bg-light termos-texto overflow-auto mb-4 p-3 border" style="height:300px;">
+                <p>
+                    Ao participar do evento “Tesouros do IFPI 2026”, você declara que leu, compreendeu e concorda
+                    integralmente com os termos e condições descritos neste documento.
+                </p>
+
+                <p>
+                    Seus dados serão utilizados exclusivamente para a organização do evento, para validação de sua
+                    identidade,
+                    confirmação de presença e garantir a integridade de todas as fases do processo.
+                </p>
+
+                <p>
+                    O CPF informado será utilizado exclusivamente para verificação de autenticidade, não sendo
+                    compartilhado com terceiros,
+                    exceto quando exigido por lei ou ordem judicial.
+                </p>
+
+                <p>
+                    Você declara estar ciente de que fornecer informações falsas constitui
+                    violação das regras do evento e poderá resultar em desqualificação ou bloqueio permanente de
+                    participação.
+                </p>
+
+                <p>
+                    O evento possui caráter sigiloso e individual. Cada CPF poderá se inscrever uma única vez. Qualquer
+                    tentativa de manipulação
+                    do sistema será monitorada e auditada.
+                </p>
+
+                <p>
+                    Ao clicar em "Iniciar inscrição", você confirma que:
+                </p>
+
+                <ul>
+                    <li>✔ Leu integralmente os termos.</li>
+                    <li>✔ Concorda com as regras do evento.</li>
+                    <li>✔ Autoriza o processamento dos dados informados.</li>
+                    <li>✔ Está apto a participar da escolha dos homenageados.</li>
+                </ul>
+
+                <p>
+                    Caso não concorde com qualquer item descrito, recomendamos que não prossiga com a inscrição.
+                </p>
+
+                <p>
+                    Estes termos podem ser atualizados sem aviso prévio, sendo responsabilidade
+                    do participante consultá-los antes de cada ação relacionada ao evento.
+                </p>
+
+                <p>
+                    Ao aceitar, você declara que possui plena capacidade civil e está agindo
+                    de forma livre e consciente.
+                </p>
+
+                <h2>Informações sobre o Evento</h2>
+                <p>
+                    O evento “Tesouros do IFPI 2026” tem como objetivo homenagear ex-alunos, alunos atuais, professores,
+                    técnicos e terceirizados
+                    que se destacaram em suas respectivas áreas, com a entrega do título "Tesouro do IFPI". Este evento
+                    é uma forma de reconhecimento
+                    pelas ações e contribuições desses indivíduos para o desenvolvimento e fortalecimento da nossa
+                    instituição.
+                </p>
+
+                <h2>Critérios de Homenageados</h2>
+                <p>
+                    Serão selecionados homenageados em diversas categorias:
+                </p>
+                <ul>
+                    <li><strong>Ex-aluno do IFPI:</strong> Destaque no mercado de trabalho e reconhecimento social.</li>
+                    <li><strong>Aluno atual do IFPI:</strong> Desempenho no curso e participação em eventos e pesquisas.
+                    </li>
+                    <li><strong>Ex-professor do IFPI:</strong> Ações que destacaram sua trajetória na instituição.</li>
+                    <li><strong>Professor atual do IFPI:</strong> Ações inovadoras e participação em projetos de
+                        extensão.</li>
+                    <li><strong>Ex-técnico do IFPI:</strong> Proatividade e impacto na história da instituição.</li>
+                    <li><strong>Técnico atual do IFPI:</strong> Proatividade e empatia.</li>
+                    <li><strong>Terceirizado:</strong> Eficiência e socialização no ambiente de trabalho.</li>
+                </ul>
+
+                <p>
+                    A escolha dos homenageados será feita por meio de votação, e o evento ocorrerá no auditório
+                    Maestrina Clóris de Oliveira, em
+                    19 de junho de 2026, das 19h às 21h.
+                </p>
+
+                <h2>Patrocínio e Apoio</h2>
+                <p>
+                    O evento conta com a colaboração e apoio de instituições parceiras que compartilham da importância
+                    da educação e do valor humano.
+                    Em 2025, o evento contou com o patrocínio da Eletrobrás, e esperamos contar com o apoio de outras
+                    instituições em 2026.
+                </p>
+
+                <p>
+                    Para a realização do evento, buscamos a parceria de patrocinadores, cujo apoio é fundamental para a
+                    estruturação do evento,
+                    incluindo a decoração do auditório, telão de fundo e iluminação, além da confecção das estatuetas
+                    para os homenageados.
+                </p>
+
+                <p>
+                    Ao aceitar este termo, você também autoriza a coleta de imagens e vídeos do evento, que poderão ser
+                    utilizados para divulgação
+                    institucional nas redes sociais do IFPI.
+                </p>
+            </div>
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="aceite mb-4 form-check">
+                    <input class="form-check-input" type="checkbox" id="concordo" name="concorda_termos">
+                    <label class="form-check-label" for="concordo">
+                        Declaro que li e aceito os termos acima.
+                    </label>
+                </div>
+
+                <button class="btn btn-success w-100" id="iniciar" type="submit" disabled>
+                    Iniciar inscrição
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts do Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+    <!-- Seu script de termos -->
+    <script src="{% static 'js/termos.js' %}"></script>
+
+</body>
+
+</html>

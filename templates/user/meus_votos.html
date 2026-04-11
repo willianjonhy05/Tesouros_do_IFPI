@@ -1,0 +1,80 @@
+{% load static bootstrap5 %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{% static 'img/icon.png' %}">
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Meus Votos</title>
+</head>
+
+<body>
+
+
+
+
+
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+
+        <div class="card shadow-lg p-4 w-100" style="max-width: 700px;">
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+
+                <h1 class="text-success m-0">
+                    Meus Votos
+                </h1>
+
+                <div class="d-flex align-items-center gap-3">
+
+                    <span class="text-muted">
+                        {{ usuario.email }}
+                    </span>
+
+                    <a href="{% url 'sair' %}" class="btn btn-danger btn-sm">
+                        Sair
+                    </a>
+
+                </div>
+
+            </div>
+
+            <hr>
+
+            <div class="row">
+                {% if votos %}
+                {% for voto in votos %}
+                <div class="col-sm-6 mb-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{voto.categoria.nome}}</h5>
+                            <p class="card-text">{{ voto.categoria.descricao }}</p>
+                            </p>
+                            {% if voto.confirmacao == False %}
+                            <a href="{% url 'votar' voto.uuid %}" class="btn btn-success">Votar</a>
+                            {% else %}
+                            <button class="btn btn-secondary" disabled>Votado</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+    {% bootstrap_javascript %}
+</body>
+
+</html>
