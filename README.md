@@ -21,7 +21,7 @@ O sistema permite autenticação de usuários, aceite de termos, registro de vot
 - Exportação de votos confirmados em arquivo `.xlsx`
 - Geração automática de thumbnails para imagens
 
-- ## Estrutura do projeto
+## Estrutura do projeto
 
 A estrutura abaixo representa a organização lógica do projeto:
 
@@ -79,7 +79,7 @@ tesouros_do_ifpi/
 
 
 
-# Tecnologias utilizadas
+## Tecnologias utilizadas
 
 - Python 3
 - Django 4.2
