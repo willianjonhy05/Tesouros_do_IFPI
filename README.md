@@ -77,6 +77,8 @@ tesouros_do_ifpi/
         ├── fullsize/
         └── thumbnails/
 
+```
+
 
 ## Tecnologias utilizadas
 
