@@ -78,7 +78,6 @@ tesouros_do_ifpi/
         └── thumbnails/
 
 
-
 ## Tecnologias utilizadas
 
 - Python 3
