@@ -21,6 +21,62 @@ O sistema permite autenticação de usuários, aceite de termos, registro de vot
 - Exportação de votos confirmados em arquivo `.xlsx`
 - Geração automática de thumbnails para imagens
 
+- ## Estrutura do projeto
+
+A estrutura abaixo representa a organização lógica do projeto:
+
+```bash
+tesouros_do_ifpi/
+│
+├── manage.py
+├── requirements.txt
+├── .env
+│
+├── setup/
+│   ├── settings.py
+│   ├── urls.py
+│   ├── wsgi.py
+│   └── asgi.py
+│
+├── app/
+│   ├── models.py
+│   ├── views.py
+│   ├── forms.py
+│   ├── utils.py
+│   ├── admin.py
+│   ├── urls.py
+│   └── migrations/
+│
+├── templates/
+│   ├── index.html
+│   ├── user/
+│   │   ├── identificacao.html
+│   │   ├── termos.html
+│   │   ├── votar.html
+│   │   ├── meus_votos.html
+│   │   ├── contato.html
+│   │   └── nao_autorizado.html
+│   │
+│   └── admin/
+│       ├── dashboard.html
+│       ├── categorias.html
+│       ├── contatos.html
+│       ├── votos.html
+│       ├── relatorio_categoria.html
+│       ├── fotos.html
+│       └── usuarios.html
+│
+├── static/
+│   ├── css/
+│   ├── js/
+│   ├── img/
+│   └── pdf/
+│
+└── media/
+    └── fotos/
+        ├── fullsize/
+        └── thumbnails/
+
 ## Tecnologias utilizadas
 
 - Python 3
